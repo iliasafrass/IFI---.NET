@@ -5,32 +5,22 @@ namespace CS.Impl._02_Intermediate
 {
     public class Recursion
     {
+
+        
+
         public IEnumerable<int> GetNaturalNumbers(int n)
         {
-
-            int i = 1;
             var list = new List<int> { };
-
-            if (i == 1)
-            {
-                list.Add(1);
-            }
-            else {
-                list.Add(n);
-                GetNaturalNumbers(n - 1);
-            }
-            return list;
-        }
+            return GetNaturalNumbers(list, 1, n);
+    }
 
         private IEnumerable<int> GetNaturalNumbers(List<int> naturalNumbers, int current, int max)
         {
 
-            var list = new List<int> { };
-            int i = current;
-
-            if(i == current)
+            
+            if(max == current)
             {
-                naturalNumbers.Add(i);
+                naturalNumbers.Add(current);
             }
             else
             {
@@ -42,38 +32,79 @@ namespace CS.Impl._02_Intermediate
 
         public int SumNaturalNumbers(int n)
         {
-            int i = 1;
-            int somme = 0;
 
-            while (i < n+1) {
-                somme += i;
-                i++;
+            if (n == 0)
+            {
+                return 0;
             }
-            return somme;
-        }
+            else {
+                return n + SumNaturalNumbers(n-1);
+            }
+         }
 
         private int ComputeSum(int min, int current)
         {
-            int somme = 0;
-            for (int i = min; i < current; i++) {
-                   
+            if (min == current)
+            {
+                return min;
             }
-            return 0;
+            else
+            {
+                return current + ComputeSum(min , current - 1);
+            }
         }
 
         public bool IsPrime(int n)
         {
-            throw new NotImplementedException();
+            return IsPrime(n,2);
         }
 
+
         private bool IsPrime(int n, int current)
-        {
-            throw new NotImplementedException();
+        {           
+            // Base cases 
+            if (n <= current)
+                return (n == current) ? true : false;
+            if (n % current == 0)
+                return false;
+            if (current * current > n)
+                return true;
+
+            // Check for next divisor 
+            return IsPrime(n, current + 1);
         }
 
         public bool IsPalindrome(string text)
         {
-            throw new NotImplementedException();
+            int n = text.Length;
+
+            // An empty string is  
+            // considered as palindrome 
+            if (n == 0)
+                return true;
+
+            return IsPalindromeRec(text, 0, n - 1);
+        }
+        bool IsPalindromeRec(String str,
+              int s, int e)
+        {
+            // If there is only one character 
+            if (s == e)
+                return true;
+
+            // If first and last 
+            // characters do not match 
+            if (str[s] != str[e])
+                return false;
+
+            // If there are more than  
+            // two characters, check if  
+            // middle substring is also  
+            // palindrome or not. 
+            if (s < e + 1)
+                return IsPalindromeRec(str, s + 1, e - 1);
+
+            return true;
         }
     }
 }
