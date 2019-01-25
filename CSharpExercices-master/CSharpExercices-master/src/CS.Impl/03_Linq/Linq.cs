@@ -9,22 +9,53 @@ namespace CS.Impl._03_Linq
     {
         public IEnumerable<string> FindStringsWhichStartsAndEndsWithSpecificCharacter(string startCharacter, string endCharacter, IEnumerable<string> strings)
         {
-            throw new NotImplementedException();
+            IEnumerable<string> result =
+                from s in strings
+                where s.StartsWith(startCharacter) && s.EndsWith(endCharacter)
+                select s;
+            return result;
         }
 
         public IEnumerable<int> GetGreaterNumbers(int limit, IEnumerable<int> numbers)
         {
-            throw new NotImplementedException();
+            IEnumerable<int> result =
+                from number in numbers
+                where number > limit
+                
+                select number;
+            return result;
         }
 
         public IEnumerable<int> GetTopNRecords(int limit, IEnumerable<int> numbers)
         {
-            throw new NotImplementedException();
+
+            IEnumerable<int> numbersTrie =
+            from number in numbers
+            orderby number descending
+            select number;
+
+            return numbersTrie.Take(limit);
         }
 
         public IDictionary<string, int> GetFileCountByExtension(IEnumerable<string> files)
         {
-            throw new NotImplementedException();
+            IEnumerable<string> result =
+            from file in files
+            select file.ToLower().Split('.')[1];
+
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+
+            foreach (string res in result) {
+                if (!dict.ContainsKey(res))
+                {
+                    dict.Add(res, 1);
+                }
+                else
+                {
+                    dict[res]++;
+                }
+            }
+            return dict;
         }
 
         public IEnumerable<Tuple<string, string, int, double>> GetFinalReceipe(List<Item> items, List<Client> clients, List<Purchase> purchases)

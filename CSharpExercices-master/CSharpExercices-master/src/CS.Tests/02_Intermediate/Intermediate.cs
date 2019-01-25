@@ -72,5 +72,19 @@ namespace CS.Tests._02_Intermediate
             Assert.IsTrue(isRadarPalindrome);
             Assert.IsFalse(isWrongPalindrome);
         }
+        
+        [TestMethod]
+        [Description("Write a program to Check the smallest positive number that is evenly divisible by all of the numbers from 1 to 20.")]
+        public void SmallestNumbrTest()
+        {
+            // Arrange
+            var recursion = new Recursion();
+            // Act
+            int smallistNumber = recursion.SmallestNumber();
+
+            // Assert
+            Assert.AreEqual(232792560, smallistNumber);
+        }
+      
     }
 }

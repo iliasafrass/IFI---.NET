@@ -6,19 +6,17 @@ namespace CS.Impl._02_Intermediate
     public class Recursion
     {
 
-        
+
 
         public IEnumerable<int> GetNaturalNumbers(int n)
         {
             var list = new List<int> { };
             return GetNaturalNumbers(list, 1, n);
-    }
+        }
 
         private IEnumerable<int> GetNaturalNumbers(List<int> naturalNumbers, int current, int max)
         {
-
-            
-            if(max == current)
+            if (max == current)
             {
                 naturalNumbers.Add(current);
             }
@@ -37,10 +35,11 @@ namespace CS.Impl._02_Intermediate
             {
                 return 0;
             }
-            else {
-                return n + SumNaturalNumbers(n-1);
+            else
+            {
+                return n + SumNaturalNumbers(n - 1);
             }
-         }
+        }
 
         private int ComputeSum(int min, int current)
         {
@@ -50,18 +49,18 @@ namespace CS.Impl._02_Intermediate
             }
             else
             {
-                return current + ComputeSum(min , current - 1);
+                return current + ComputeSum(min, current - 1);
             }
         }
 
         public bool IsPrime(int n)
         {
-            return IsPrime(n,2);
+            return IsPrime(n, 2);
         }
 
 
         private bool IsPrime(int n, int current)
-        {           
+        {
             // Base cases 
             if (n <= current)
                 return (n == current) ? true : false;
@@ -85,8 +84,7 @@ namespace CS.Impl._02_Intermediate
 
             return IsPalindromeRec(text, 0, n - 1);
         }
-        bool IsPalindromeRec(String str,
-              int s, int e)
+        bool IsPalindromeRec(String str, int s, int e)
         {
             // If there is only one character 
             if (s == e)
@@ -105,6 +103,25 @@ namespace CS.Impl._02_Intermediate
                 return IsPalindromeRec(str, s + 1, e - 1);
 
             return true;
+        }
+
+        public int SmallestNumber()
+        {
+            bool found = true;
+            int result = 0;
+            for (int x = 2520; found; x+=2520)
+            {
+                if (IsPrime((int)x)) {
+                    continue;
+                }
+                else if (x % 11 != 0 || x % 12 != 0 || x % 13 != 0 || x % 14 != 0 || x % 15 != 0 || x % 16 != 0 || x % 17 != 0
+                    || x % 18 != 0 || x % 19 != 0 || x % 20 != 0
+                    ) continue;
+                result = x;
+                found = false;
+
+            }
+            return result;
         }
     }
 }
