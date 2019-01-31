@@ -60,7 +60,19 @@ namespace CS.Impl._03_Linq
 
         public IEnumerable<Tuple<string, string, int, double>> GetFinalReceipe(List<Item> items, List<Client> clients, List<Purchase> purchases)
         {
-            throw new NotImplementedException();
+            var receipes =
+                from p in purchases
+                join i in items on p.ItemId equals i.Id
+                join c in clients on p.ClientId equals c.Id
+                select new { Name = c.Name, Label = i.Label, Quantity = p.Quantity, Price = i.Price };
+
+                List<Tuple< string, string, int, double>> finalReceipe = new List<Tuple<string, string, int, double>>();
+
+            foreach(var r in receipes) {
+                finalReceipe.Add(new Tuple<string, string, int, double> (r.Name,r.Label,r.Quantity,r.Price));
+            }
+            return finalReceipe;
+
         }
     }
 
